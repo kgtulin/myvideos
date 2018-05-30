@@ -1,0 +1,14 @@
+<h2>Мои фильмы</h2>
+
+<hr/>
+
+<table width="100%" cellpadding="4">
+<tr *ngFor="let video of videoList.getVideos()">
+	<td>
+		<a [routerLink]="'/videodetail/'+video.imdbID">{{video.Title}} ({{video.Year}})</a>
+	</td>
+	<td align="right">
+		<button mat-raised-button (click)="videoList.removeVideo(video)">Удалить</button>
+	</td>
+</tr>
+</table>

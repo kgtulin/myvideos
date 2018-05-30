@@ -1,0 +1,33 @@
+<h2>Поиск фильмов</h2>
+
+<div style="width:400px">
+	
+	<mat-form-field class="example-full-width">
+		<input matInput style="width:100%" placeholder="Название фильма" (input)="queryAutoComplit()" [(ngModel)]="queryString" value="Sushi">
+	</mat-form-field>
+
+	<button mat-raised-button (click)="querySearch()">Искать</button>
+</div>
+
+<div *ngIf="autoComplitResult" style="width:200px; top:240px; background:white; padding:10px; border:1px solid silver; position:absolute" id="autoComplit" onclick="this.style.display='none'">
+	<a href="#" (click)="queryString=autoComplitResult.Title; querySearch();">{{autoComplitResult.Title}} ({{autoComplitResult.Year}})</a>
+</div>
+
+<hr/>
+
+<div *ngIf="resultData">
+	<a [routerLink]="'/videodetail/'+resultData.imdbID">{{resultData.Title}} ({{resultData.Year}})</a>&nbsp;&nbsp;
+
+
+	<span *ngIf="videoList.checkVideo(resultData); then showText else showButton"></span>
+
+	<ng-template #showButton>
+		<button mat-raised-button [disabled]="videoList.checkVideo(resultData)" (click)="videoList.addVideo(resultData)">Добавить в избранное</button>
+	</ng-template>
+	<ng-template #showText>
+		в избранном
+	</ng-template>
+
+</div>
+
+{{test}}
